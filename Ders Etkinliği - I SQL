@@ -1,0 +1,41 @@
+create database kutuphane;
+
+
+use kutuphane;
+create table ibrahimin_kitaplar(
+KitapID int NOT NULL primary key identity(1, 1),
+KitapAdi nvarchar(100),
+Yazar nvarchar(100),
+YayinYili nvarchar(100),
+);
+
+create table ibrahimin_uyeler(
+UyeID int NOT NULL primary key identity(1, 1),
+UyeAdi nvarchar(100),
+UyeSoyadi nvarchar(100),
+Telefon nvarchar(100),
+);
+
+create table ibrahimin_odunc(
+OduncID int NOT NULL primary key identity(1, 1),
+UyeID int foreign key(UyeID) REFERENCES ibrahimin_uyeler(UyeID),
+kitapID int foreign key(KitapID) REFERENCES ibrahimin_kitaplar(KitapID),
+AlimTarihi nvarchar(100),
+TeslimTarihi nvarchar(100),
+);
+
+-- ibrahimin_kitaplar tablosuna veri ekleme
+INSERT INTO ibrahimin_kitaplar (KitapAdi, Yazar, YayinYili) VALUES
+('Suç ve Ceza', 'Fyodor Dostoyevski', '1866'),
+('Kürk Mantolu Madonna', 'Sabahattin Ali', '1943'),
+('Sefiller', 'Victor Hugo', '1862');
+-- ibrahimin_üyeler tablosuna veri ekleme
+INSERT INTO ibrahimin_üyeler (UyeAdi, UyeSoyadi, Telefon) VALUES
+('Ahmet', 'Yılmaz', '05551234567'),
+('Elif', 'Demir', '05559876543'),
+('Mehmet', 'Kaya', '05557654321');
+-- ibrahimin_ödünç tablosuna veri ekleme
+INSERT INTO ibrahimin_ödünç (UyeID, KitapID, AlimTarihi, TeslimTarihi) VALUES
+(1, 2, '2025-09-01', '2025-09-15'),
+(2, 1, '2025-09-05', '2025-09-20'),
+(3, 3, '2025-09-10', '2025-09-25');
